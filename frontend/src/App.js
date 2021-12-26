@@ -12,6 +12,7 @@ const NotFound = ({  }) => {
     )
 }
 
+
 class App extends React.Component {
   constructor(prop) {
     super(prop)
