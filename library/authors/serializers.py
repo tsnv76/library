@@ -15,3 +15,9 @@ class BioModelSerializer(ModelSerializer):
     class Meta:
         model = Bio
         fields = '__all__'
+
+
+class BookModelSerializer(ModelSerializer):
+    class Meta:
+        model = Book
+        fields = '__all__'

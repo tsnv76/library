@@ -3,14 +3,15 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
 from authors import views
-from authors.views import AuthorModelViewSet, AuthorViewSet, BioViewSet, AuthorAPIView
+from authors.views import AuthorModelViewSet, AuthorViewSet, BioViewSet, AuthorAPIView, BookViewSet
 
 # get_view, post_view, BioViewSet
 
 # router = SimpleRouter()
 router = DefaultRouter()
 router.register('authors', AuthorViewSet, basename='authors')
-router.register('bios', BioViewSet)
+router.register('bios', BioViewSet),
+router.register('books', BookViewSet)
 
 #
 
