@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter, SimpleRouter
+from rest_framework.authtoken import views
 
-from authors import views
 from authors.views import AuthorModelViewSet, AuthorViewSet, BioViewSet, AuthorAPIView, BookViewSet
 
 # get_view, post_view, BioViewSet
@@ -27,6 +27,8 @@ router.register('books', BookViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api-token-auth/', views.obtain_auth_token),
     # path('api/get/', AuthorViewSet.as_view({'get': 'list'})),
     # path('api/get/<int:pk>/', AuthorAPIView.as_view()),
     # path('api/post/', post_view)
