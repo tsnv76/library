@@ -7,7 +7,7 @@ from rest_framework.viewsets import ModelViewSet, ViewSet, GenericViewSet
 from rest_framework.serializers import Serializer, CharField, IntegerField, ValidationError
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.parsers import JSONParser
-from .serializers import AuthorModelSerializer, BioModelSerializer, BookModelSerializer
+from .serializers import AuthorModelSerializer, BioModelSerializer, BookModelSerializer, AuthorModelSerializerV2
 from .models import Author, Bio, Book
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, DjangoModelPermissions, BasePermission
@@ -24,9 +24,15 @@ class CustomPermission(BasePermission):
 
 class AuthorModelViewSet(ModelViewSet):
     # renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
-    # permission_classes = [DjangoModelPermissions]
+    # permission_classes = [CustomPermission]
     queryset = Author.objects.all()
-    serializer_class = AuthorModelSerializer
+    # serializer_class = AuthorModelSerializer
+    # filterset_fields = ['first_name']
+
+    def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return AuthorModelSerializerV2
+        return AuthorModelSerializer
 
 
 class BioViewSet(ModelViewSet):
