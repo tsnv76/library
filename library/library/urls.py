@@ -6,6 +6,7 @@ from rest_framework.authtoken import views
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from authors.views import AuthorModelViewSet, AuthorViewSet, BioViewSet, AuthorAPIView, BookViewSet
+from graphene_django.views import GraphQLView
 
 # get_view, post_view, BioViewSet
 
@@ -48,6 +49,7 @@ urlpatterns = [
     path('api/authors/v2', include('authors.urls', namespace='v2')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0)),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0)),
+    path('graphql/', GraphQLView.as_view(graphiql=True))
 
     # path('api/get/', AuthorViewSet.as_view({'get': 'list'})),
     # path('api/get/<int:pk>/', AuthorAPIView.as_view()),
